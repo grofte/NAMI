@@ -38,7 +38,7 @@ Build-dep adds all the things that matplotlib depends on to run - it might not b
 
 Enthought supplies a Python distribution that easily enables the installation of 100+ common Python libraries. They have two free versions - one called Enthought Canopy Express with a reduced number of libraries ([http://www.enthought.com/canopy-express/](http://www.enthought.com/canopy-express/)) and a yearly renewing free academic license for Enthought Canopy ([http://www.enthought.com/products/canopy/academic/](http://www.enthought.com/products/canopy/academic/)). 
 
-**We need to test on some windows machines that this ****works fine. But I think it should.**
+**We need to test on some windows machines that this works fine. But I think it should.**
 
 #####2. Running NAMI
 
@@ -60,7 +60,7 @@ Example for Windows:
 
 Click "Set Input Parameters". Click “Raw data” to choose the file containing the fluorescence intensities. NAMI flexibly reads text files saved as comma separated values (.csv), skipping the first line to avoid headers. All spreadsheets, e.g. LibreOffice Calc or Microsoft Office Excel, can save in .csv format but remember to use comma as the field separator. We are working to add Python scripts to convert the raw, exported data from any qPCR software but we need examples to work from. Python script contributions are gratefully accepted - please remember to include the qPCR machine model and software version number. Example raw data files are provided in the directory ExampleFiles, e.g. glucoseisomerase-salt-Mg.csv. 
 
-Click "Solutes file" to provide a file with information about the experimental contents of each well. This is required to plot the temperature of hydrophobic exposure (T<sub>h</sub>) vs concentration or pH etc. but not necessary for determination of T<sub>h</sub>. An example raw data files is provided in the directory ExampleFiles, i.e. solsalt.sol. 
+Click "Solutes file" to provide a file with information about the experimental contents of each well. This is required to plot the temperature of hydrophobic exposure (T<sub>h</sub>) vs concentration or pH etc. but not necessary for determination of T<sub>h</sub>. An example raw data files is provided in the directory ExampleFiles, e.g. solsalt.sol. 
 
 Click "Results from a previous run" to provide a text file from a previous run with T<sub>h</sub> and skip the data processing and go directly to the plotting tools. Raw data are still required since the waterfall plot option uses the raw data. 
 
