@@ -1646,7 +1646,7 @@ class AnalysisPlotPopup(QtGui.QWidget):
 	def plotcationtime(self):
 		self.canvas.figure.clf()
 		ax = self.figure.add_subplot(111)
-		ax.set_ylabel('$T_h$ ($^o$C)')
+		ax.set_ylabel('T$_h$ ($^o$C)')
 		self.cationtime()
 		for solute in set(self.remember):
 			if solute != False:
@@ -1800,13 +1800,14 @@ class AnalysisPlotPopup(QtGui.QWidget):
 		ax = self.figure.add_subplot(111)
 		#box = ax.get_position()
 		#ax.set_position([box.x0, box.y0 + box.height * 0.1, box.width, box.height * 0.9 ])
-		ax.set_ylabel('$T_h$ ($^o$C)')
+		ax.set_ylabel('T$_h$ ($^o$C)')
 		self.concentrationgraphs() # when you call this multiple times, is affected?
 		
 		for solute in set(self.remember):
 			if solute != False: 
 
 				# The following three lines are just to sort the plotting so they are plotted in order and it doesnt look funny when you try to plot it
+				print (self.plotdictionary_concentration[solute][0],self.plotdictionary_concentration[solute][1])
 				zipped = zip(self.plotdictionary_concentration[solute][0],self.plotdictionary_concentration[solute][1])
 				zipped.sort(key = lambda t: t[0])
 				a = [list(t) for t in zip(*zipped)]
@@ -1834,17 +1835,22 @@ class AnalysisPlotPopup(QtGui.QWidget):
 
 		self.canvas.figure.clf()
 		ax = self.figure.add_subplot(111)
-		ax.set_ylabel('$T_h$ ($^o$C)')
+		ax.set_ylabel('T$_h$ ($^o$C)')
 		self.correctedph()
 
 		for solute in set(self.remember):
 			if solute != False:
+				# The following three lines are just to sort the plotting so they are plotted in order and it doesnt look funny when you try to plot it
+				zipped = zip(self.plotdictionary_pH[solute][0],self.plotdictionary_pH[solute][1])
+				zipped.sort(key = lambda t: t[0])
+				a = [list(t) for t in zip(*zipped)]
 
-				ax.plot(self.plotdictionary_pH[solute][0],self.plotdictionary_pH[solute][1], label=str(solute), marker=self.marker.next())
-
+				ax.plot(a[0],a[1], label=str(solute), marker=self.marker.next())
+				#ax.plot(self.plotdictionary_pH[solute][0],self.plotdictionary_pH[solute][1], label=str(solute), marker=self.marker.next())
+				#previous plotting, before we sorted it
 		legend_font_props = FontProperties()
 		legend_font_props.set_size('small')
-		ax.set_xlabel('$Corrected$  $pH$')
+		ax.set_xlabel('Corrected pH')
 		ax.legend(loc='best', prop=legend_font_props)
 		self.figure.canvas.draw()
 		
