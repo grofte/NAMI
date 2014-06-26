@@ -1384,6 +1384,7 @@ class AnalysisPlotPopup(QtGui.QWidget):
 		layout.addWidget(self.button2)
 
 		self.linear = QtGui.QRadioButton('linear')
+		self.linear.setChecked(True)
 		layout.addWidget(self.linear)
 
 		self.log = QtGui.QRadioButton('log')
@@ -1553,7 +1554,7 @@ class AnalysisPlotPopup(QtGui.QWidget):
 
 		if self.linear.isChecked()==True:
 			ax.add_collection3d(poly, zs=self.concentrationforplot, zdir='y')
-			ax.set_ylabel('Concentration /mM')
+			ax.set_ylabel('Concentration (mM)')
 			ax.set_ylim3d(max(self.concentrationforplot), min(self.concentrationforplot))
 			try:
 				ax.add_collection3d(line, zs=c, zdir='y') # adding the melting temperatures 
@@ -1562,7 +1563,7 @@ class AnalysisPlotPopup(QtGui.QWidget):
 		elif self.log.isChecked()==True:
 			c = [math.log(i) for i in self.concentrationforplot]
 			ax.add_collection3d(poly, zs=c, zdir='y')
-			ax.set_ylabel('Log$_{10}$(Concentration) /mM')
+			ax.set_ylabel('Concentration (Log$_{10}$mM)')
 			ax.set_ylim3d(max(c), min(c))
 			try:
 				ax.add_collection3d(line, zs=c, zdir='y')
@@ -1571,7 +1572,7 @@ class AnalysisPlotPopup(QtGui.QWidget):
 
 		else:
 			ax.add_collection3d(poly, zs=self.concentrationforplot, zdir='y')
-			ax.set_ylabel('Concentration /mM')
+			ax.set_ylabel('Concentration (mM)')
 			ax.set_ylim3d(max(self.concentrationforplot), min(self.concentrationforplot))
 			try:
 				ax.add_collection3d(line, zs=c, zdir='y')
@@ -1813,10 +1814,10 @@ class AnalysisPlotPopup(QtGui.QWidget):
 				ax.plot(a[0],a[1], label=str(solute), marker=self.marker.next())
 
 		if self.linear.isChecked()==True:
-			ax.set_xlabel('Concentration /mM')
+			ax.set_xlabel('Concentration (mM)')
 		elif self.log.isChecked()==True:
 			ax.set_xscale('log')
-			ax.set_xlabel('Log$_{10}$(Concentration) /mM')
+			ax.set_xlabel('Concentration (Log$_{10}$mM)')
 		else:
 			pass
 
