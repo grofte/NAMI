@@ -1,5 +1,4 @@
-
-# Screen name Morten_pH
+# Screen name salt_1
 # pH and pKa/deg must be given in units celsius degrees
 # Well number, pH_at_25C, delta-pKa/T, Additives(name), Additive(mM), Optional Salt(name), Concentration of Salt(mM), Cation Charge, Anion Charge
 1,,,water,,,,,
