@@ -35,9 +35,9 @@ Build-dep adds all the things that matplotlib depends on to run - it might not b
 
 **1.3 Windows** 
 
-Enthought supplies a Python distribution that easily enables the installation of 100+ common Python libraries. They have two free versions - one called Enthought Canopy Express with a reduced number of libraries ([http://www.enthought.com/canopy-express/](http://www.enthought.com/canopy-express/)) and a yearly renewing free academic license for Enthought Canopy ([http://www.enthought.com/products/canopy/academic/](http://www.enthought.com/products/canopy/academic/)). 
+The simplest way is to use WinPython which comes with the relevant modules built in (http://winpython.sourceforge.net/).
 
-**We need to test on some windows machines that this works fine. But I think it should.**
+Otherwise Enthought supplies a Python distribution that easily enables the installation of 100+ common Python libraries. They have two free versions - one called Enthought Canopy Express with a reduced number of libraries ([http://www.enthought.com/canopy-express/](http://www.enthought.com/canopy-express/)) and a yearly renewing free academic license for Enthought Canopy ([http://www.enthought.com/products/canopy/academic/](http://www.enthought.com/products/canopy/academic/)). 
 
 #####2. Running NAMI
 
