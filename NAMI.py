@@ -1203,7 +1203,7 @@ class InputParametersPopup(QtGui.QWidget):
 		self.tincr = QtGui.QLineEdit()
 		self.tincr.setPlaceholderText("1")
 		grid.addWidget(self.tincr,9,1)
-		lbl6 = QtGui.QLabel('Temperature increments')
+		lbl6 = QtGui.QLabel('Temperature increment multiplier')
 		# lbl4.move(16,10)
 		grid.addWidget(lbl6,9,0)		
 
@@ -1866,3 +1866,4 @@ aw.show()
 sys.exit(qApp.exec_())
 qApp.exec_()
 
+# Please cite: Groftehauge et al. 2014. Acta Cryst D.
