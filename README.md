@@ -5,7 +5,7 @@ GUI-based Python program for thermal shift assay data analysis and interpretatio
 
 -----------------------------
 
-Please cite: blah blah Groftehauge et al. 2014. Acta Cryst. D
+Please cite: Groftehauge et al. 2014. Acta Cryst. D
 
 -----------------------------
 
@@ -67,13 +67,13 @@ Click "Set Input Parameters". Click “Raw data” to choose the file containing
 
 Click "Solutes file" to provide a file with information about the experimental contents of each well. This is required to plot the temperature of hydrophobic exposure (T<sub>h</sub>) vs concentration or pH etc. but not necessary for determination of T<sub>h</sub>. An example raw data files is provided in the directory ExampleFiles, e.g. solsalt.sol. 
 
-Click "Results from a previous run" to provide a text file from a previous run with T<sub>h</sub> and skip the data processing and go directly to the plotting tools. Raw data are still required since the waterfall plot option uses the raw data. 
+Click "Results from a previous run" to provide a text file from a previous run with T<sub>h</sub> and skip the data processing and go directly to the plotting tools. Raw data are still required since the waterfall plot option uses the raw data. **Note: resume from previous results is temporarily broken**
 
 Specify which columns contain well numbers, temperatures, and fluorescence intensities. On some machines the temperature is not specified but only the number of the reading is given. So if the first reading was at 24 degrees then a temperature offset of 23 should be input. You could also use this to get your results in Kelvin rather than Celsius.
 
-Specify what the temperature step increment is. We have excellent results with 1 degree steps but some qPCR machines are extremely fast and some people prefer to sample fluorescence more often.
+Specify what the temperature step increment multiplier is. We have excellent results with 1 degree steps but some qPCR machines are extremely fast and some people prefer to sample fluorescence more often. This should be 1 in most cases. It is only neccessary to change if you both have a temperature increment that is different from 1 and your machine doesn't output temperatures but only reading number. 
 
-Specify the number of wells. If your data file contains fewer wells than you input then NAMI will crash. However, you can specify fewer wells than are present in the data file to avoid spending time processing them.
+Specify the number of wells. If your data file contains fewer wells than you input then NAMI will crash. However, you can also specify fewer wells than are present in the data file to avoid spending time processing them.
 
 Click "Apply" and “Close”.
 
@@ -91,8 +91,6 @@ At the end of data processing a pop-up allows the input of a reference temperatu
 
 If a .sol file was provided before data processing the contents of each well is displayed when the mouse pointer hovers over a well in the table.
 
-The 96-well table can also be generated directly by going to the "Data" menu and clicking “Load table”. 
-
 **2.6 Various plots**
 
 After setting the reference temperature and generating a table there are various additional plotting options available. 
@@ -101,9 +99,9 @@ Go to the "Data" menu and click “Plots for Analysis”. Choose one or more sol
 
 **Waterfall** plots allows you to inspect raw data for a single solute at various concentrations more quickly than by finding each graph saved as a png. This allows you to easily estimate if the noise in the data or two-stage denaturation changed with solute concentration. The graphs are colour-coded in the same scheme as the 96-well table but uses purple instead of white when there is no difference from the reference. The graph can be rotated with the mouse.
 
-**T<sub>h</sub> vs concentration** accepts any number of solutes and gives you an idea of how the influence of each solute on thermal stability changes with concentration. For salts the influence of both anions and cations are of course aggregated so if a hypothetical protein is destabilised by, say, Cl- and unaffected by Na+, NH4+, and SO42- then both NH4Cl and NaCl should destabilise it while (NH4)2SO4 and Na2SO4 should not.
+**T<sub>h</sub> vs concentration** accepts any number of solutes and gives you an idea of how the influence of each solute on thermal stability changes with concentration. For salts the influence of both anions and cations are of course aggregated so if a hypothetical protein is destabilised by, say, Cl<sup>-</sup> and unaffected by Na<sup>+</sup>, NH<sub>4</sub><sup>+</sup>, and SO<sub>4</sub><sup>2-</sup> then both NH<sub>4</sub>Cl and NaCl should destabilise it while (NH<sub>4</sub>)<sub>42</sub>SO<sub>4</sub> and Na<sub>2</sub>SO<sub>4</sub> should not.
 
-**T<sub>h</sub> vs pH** accepts any number of solutes and corrects the pH by the T<sub>h</sub> (since pKa is temperature dependent) before plotting the values. As with salts the effect of H+ concentration is reflected in aggregate with the effect of a buffer molecule. Sometimes a buffer molecule will bind to a protein and influence the energy required to denature that protein. 
+**T<sub>h</sub> vs pH** accepts any number of solutes and corrects the pH by the T<sub>h</sub> (since pK<sub>a</sub> is temperature dependent) before plotting the values. As with salts the effect of H<sup>+</sup> concentration is reflected in aggregate with the effect of a buffer molecule. Sometimes a buffer molecule will bind to a protein and influence the energy required to denature that protein. 
 
 Click "Save" to save the current view of any plot.
 
@@ -119,18 +117,24 @@ Metal-binding proteins are quite common. If a metal chelator, e.g. EDTA or EGTA,
 
 You can use various assays to determine the effects of stabilising ions. Stabilising ions can both be activators and inhibitors of activity. Destabilising ions are typically non-specific protein denaturants. The transition metal ions are particularly effective at this. 
 
+EDTA is often used in lysis buffers as a protease inhibitor but if the folding of the protein of interest is highly dependent on divalent metal ions then EDTA could both leave it vulnerable to proteases and liable to spontaneously denature. 
+
+This information is also highly valuable to crystallographers since phase information can be retrieved from bound metal ions (some of them). 
+
 **3.2 High concentration salts**
 
-Typically salts with divalent anions **may** have a stabilising effect at high concentration. For crystallisation you can try to use a protein buffer with maybe 1 M of a very stabilising salt. You may move some screening conditions from vapor diffusion to batch crystallisation but as long as you get crystals it doesn’t actually matter. For protein storage there will be an optimal salt concentration at which the protein is most soluble and it is not necessarily the concentration at which the protein is most stable. 
+Typically salts with divalent anions **may** have a stabilising effect at high concentration. For protein storage there will be an optimal salt concentration at which the protein is most soluble and it is not necessarily the concentration at which the protein is most stable. 
+
+NaF is interesting for circular dichroism experiments and for crystallisation you can try to use a protein buffer with maybe 1 M of a very stabilising salt. You may move some screening conditions from vapor diffusion to batch crystallisation but as long as you get diffracting crystals it doesn’t actually matter how. 
 
 **3.3 pH screening**
 
-For pH screening NAMI will correct by delta-pKa / degree when plotting T<sub>h</sub> vs pH. Delta-T<sub>h</sub> depends on both the pH and the buffer molecule used so try multiple buffers at the same pH to determine what changes to attribute to pH and what to attribute to the buffer molecule. 
+For pH screening NAMI will correct by delta-pK<sub>a</sub> / degree when plotting T<sub>h</sub> vs pH. Delta-T<sub>h</sub> depends on both the pH and the buffer molecule used so try multiple buffers at the same pH to determine what changes to attribute to pH and what to attribute to the buffer molecule. pH correction is important since delta-pK<sub>a</sub> differs highly between buffer molecules, e.g. the pKa of Tris decreases by 1.86 between 20 and 80 degrees Celsius (and obviously the pH of a solution buffered by Tris would decrease by the same amount). The pK<sub>a</sub>s of the protein's ionisable groups also change with temperature but will change the same in each experiment since the protein is the same. This is by the way one of the many reasons you should not use Tris unless you've tried HEPES, MOPS, bis-tris (propane and methane), tricine, bicine and they didn't work in your experiment.
 
-In our experience protein stability always changes somewhat with pH but is not predictive of crystallising conditions. 
+In our experience protein stability always changes somewhat with pH but is not predictive of crystallising conditions. But a specific buffer molecule may be neccessary for crystallisation because it binds in some site (even if the buffer molecule is a weak ligand, it is present at 100 mM). 
 
 -----------------------------
 
-Please cite: blah blah Groftehauge et al. 2014. Acta Cryst. D
+Please cite: Groftehauge et al. 2014. Acta Cryst. D
 
 -----------------------------
