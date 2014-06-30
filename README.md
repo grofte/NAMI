@@ -31,7 +31,7 @@ Build-dep adds all the things that matplotlib depends on to run - it might not b
 
 **1.2 Mac**
 
-**Nelly? Ehmke? **
+Instructions coming. Enthought is also available for Mac but there doesn't seem to be anything as simple as WinPython. 
 
 **1.3 Windows** 
 
