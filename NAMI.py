@@ -1323,7 +1323,7 @@ class TablePopup(QtGui.QWidget):
 		try:
 			self.emit(QtCore.SIGNAL('mySigT'), float(self.reft.text()),float(self.sigd.text()))
 		except ValueError:
-			QtGui.QMessageBox.critical(self, "C'mon, Retard", "Mate, insert some numbers")
+			QtGui.QMessageBox.critical(self, "Aww, c'mon", "Mate, insert some numbers")
 
 	def showTable(self):
 		self.emit(QtCore.SIGNAL('Table'))
