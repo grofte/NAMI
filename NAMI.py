@@ -1113,7 +1113,9 @@ class ApplicationWindow(QtGui.QMainWindow):
 		''' If you want to insert details about the program, then add things here.'''
 
 		QtGui.QMessageBox.about(self, "About",
-"""Please cite our amazing paper Groftehauge, 2014, Acta D when using the program. """
+"""Please cite our amazing paper Groftehauge, 2014, Acta D when using the program.
+
+Logo created by Olivia Slättengren. """
 )
 
 
