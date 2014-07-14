@@ -163,22 +163,29 @@ class ApplicationWindow(QtGui.QMainWindow):
 
 
 		# OPEN BAR, in the old version they were only on the menu button
-		self.open_menu = QtGui.QMenu('&Open', self)
-		self.file_menu.addAction('&Open Dataset', self.fileOpen)
-		self.menuBar().addMenu(self.file_menu)
+		#self.open_menu = QtGui.QMenu('&Open', self)
+		#self.file_menu.addAction('&Open Dataset', self.fileOpen)
+		#self.menuBar().addMenu(self.file_menu)
 
 
-		self.open_menu = QtGui.QMenu('&Open', self)
-		self.file_menu.addAction('&Open solutionsfile', self.openSolFile)
-		self.menuBar().addMenu(self.file_menu)
+		#self.open_menu = QtGui.QMenu('&Open', self)
+		#self.file_menu.addAction('&Open solutionsfile', self.openSolFile)
+		#self.menuBar().addMenu(self.file_menu)
 
 
-		self.open_menu = QtGui.QMenu('&Open', self)
-		self.file_menu.addAction('&Open Results', self.openResults)
-		self.menuBar().addMenu(self.file_menu)
+		#self.open_menu = QtGui.QMenu('&Open', self)
+		#self.file_menu.addAction('&Open Results', self.openResults)
+		#self.menuBar().addMenu(self.file_menu)
+
+		self.about_menu = QtGui.QMenu('&NAMI', self)
+		self.menuBar().addSeparator()
+		self.about_menu.addAction('& About NAMI', self.about)
+		self.about_menu.addAction('&Quit NAMI', self.fileQuit)
+		self.menuBar().addMenu(self.about_menu)
 
 
-
+		
+		#self.menuBar().addSeparator()
 		##############################################
 
 
@@ -190,20 +197,24 @@ class ApplicationWindow(QtGui.QMainWindow):
 		self.plot_menu.addAction('Load table (from previous results)', self.widgetT.showTable)
 		self.plot_menu.addAction('Re-input parameters', self.resultsinputwindow)
 		self.menuBar().addMenu(self.plot_menu)
+
+
 		self.widgetplot = AnalysisPlotPopup()
-		self.widgetplot.setGeometry(400,200,950,900)
+		self.widgetplot.setGeometry(400,200,950, 900) # if you want to change the size of the plot window (popup)
 
 
 		############################################
+
 
 
 		# HELP BAR
 		# adding details about what to cite and how to use the program should be inserted here. (connect it to self.help_menu)
 		self.help_menu = QtGui.QMenu('&Help', self)
 		self.menuBar().addSeparator()
+		#self.help_menu.addAction('&About', self.about)
+		self.help_menu.addAction('&Help', self.info)
 		self.menuBar().addMenu(self.help_menu)
-			# ABOUT 
-		self.help_menu.addAction('&About', self.about)
+
 
 
 
@@ -433,15 +444,22 @@ class ApplicationWindow(QtGui.QMainWindow):
 		''' pretty sure this function processes the resultsfile into an array. '''
 
 		if len(self.resultsfile) > 0:
-			fresults = numpy.genfromtxt(self.resultsfile, delimiter=',', dtype=None)
-			for w in range(3,99):
-				if len(fresults[w][2]) == 0:
-					self.th_data.append(float(fresults[w][1]))
-				else:
-					self.th_data.append((float(fresults[w][1]),float(fresults[w][2])))
+			datafile = open(self.resultsfile, 'r')
+			datareader = csv.reader(datafile)
+			results = []
+			for row in datareader:
+				results.append( row)
+			
 
-			self.parsefile(int(fresults[1][0]),int(fresults[1][1]),int(fresults[1][2]), int(fresults[1][3]))
-			#print "self, thdaa", self.th_data
+		 	for w in range(3,97):
+		 		if len(results[w][2]) == 0:
+		 			self.th_data.append(float(results[w][1]))
+		 		else:
+		 			self.th_data.append((float(results[w][1]),float(results[w][2])))
+
+		 	print results[1][0]
+		 	self.parsefile(int(results[1][0]),float(results[1][1]),int(results[1][2]), int(results[1][3]),int(results[1][4]),float(results[1][5]) )
+		# print "self, thdaa", self.th_data
 
 
 	def fileOpen(self):
@@ -752,8 +770,8 @@ class ApplicationWindow(QtGui.QMainWindow):
 		name = os.path.basename(self.filename)
 		f = open("results.csv", "w")
 		c = csv.writer(f)
-		c.writerow(['Columntemperature', 'Offset_temperature', 'Filter','Columnwell'])
-		c.writerow([self.args[0]-1,self.args[1],self.args[2]-1,self.args[3]-1])
+		c.writerow(['Columntemperature', 'Offset_temperature', 'Filter','Columnwell', 'Wellnumbers', 'Increment'])
+		c.writerow([ self.args[0]-1,self.args[1],self.args[2]-1,self.args[3]-1,self.args[4]+1,self.args[5]]) 
 		c.writerow(['Well Number', 'Calculated_Th', 'Peak_2/Warning','User_Input'])
 
 		############################################
@@ -1115,9 +1133,15 @@ class ApplicationWindow(QtGui.QMainWindow):
 		QtGui.QMessageBox.about(self, "About",
 """Please cite our amazing paper Groftehauge, 2014, Acta D when using the program.
 
-Logo created by Olivia Slättengren. """
+Logo created by Olivia Slattengren. """
 )
 
+	def info(self):
+		''' If you want to insert details about the program, then add things here.'''
+
+		QtGui.QMessageBox.about(self, "About",
+"""If you run into any problems please visit the GitHub page for guidance: https://github.com/grofte/NAMI """
+)
 
 class InputParametersPopup(QtGui.QWidget):
 	''' This class contains the popup window where you insert all the files and gives the column values.'''
@@ -1164,7 +1188,7 @@ class InputParametersPopup(QtGui.QWidget):
 		self.column = QtGui.QLineEdit()
 		self.column.setPlaceholderText("1")
 		#self.column.setText("0")
-		grid.addWidget(self.column,4,1)
+		grid.addWidget(self.column,10,6)
 		lbl1 = QtGui.QLabel('Column containing temperature values ')
 		lbl1.move(100,100)
 		grid.addWidget(lbl1,4,0)
@@ -1405,7 +1429,7 @@ class AnalysisPlotPopup(QtGui.QWidget):
 
 
 		##########  CANVAS ####################################################
-		self.figure = plt.figure(figsize= (10,6), dpi=100)
+		self.figure = plt.figure(figsize= (4,1), dpi=100)
 		self.canvas =  mpl.backends.backend_qt4agg.FigureCanvasQTAgg(self.figure)
 		layout.addWidget(self.canvas)
 		self.canvas.setParent(self.m_widget) # main_widget parent instead of main_frame
