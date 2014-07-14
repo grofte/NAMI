@@ -752,9 +752,9 @@ class ApplicationWindow(QtGui.QMainWindow):
 		name = os.path.basename(self.filename)
 		f = open("results.csv", "w")
 		c = csv.writer(f)
-		c.writerow(['Columntemperature', 'Offset_temperature', 'Filter','Columnwell'])
-		c.writerow([self.args[0]-1,self.args[1],self.args[2]-1,self.args[3]-1])
-		c.writerow(['Well Number', 'Calculated_Th', 'Peak_2/Warning','User_Input'])
+		c.writerow(["#", 'Columntemperature', 'Offset_temperature', 'Filter','Columnwell'])
+		c.writerow(["#", self.args[0]-1, self.args[1] ,self.args[2]-1 ,self.args[3]-1] )
+		c.writerow(['Well Number', 'Calculated_Th', 'Peak_2/Warning', 'User_Input'])
 
 		############################################
 		#f = open(self.filename+'_results'+'.txt', 'a')
@@ -1004,7 +1004,7 @@ class ApplicationWindow(QtGui.QMainWindow):
 		cd_red = dict(zip(change_r, red)) # CREATE DICTIONARY
 		cd_blue = dict(zip(change_b, blue)) # CREATE DICTIONARY
 		cell_text = [['','','','','','','','','','','',''], self.th_data[0:12], self.th_data[12:24],self.th_data[24:36], self.th_data[36:48], self.th_data[48:60], self.th_data[60:72], self.th_data[72:84], self.th_data[84:96]]
-
+		white_font_values = []
 
 
 
@@ -1021,8 +1021,12 @@ class ApplicationWindow(QtGui.QMainWindow):
 					if th_change > minsigdelta: # the significant change should be able to be user defined 
 						colors[lists][values] = cd_blue[self.find_nearest(numpy.asarray(change_b), th_change)] 
 						#colors[lists][values] = (0.55, 0, 0)
+						if cd_blue[self.find_nearest(numpy.asarray(change_b), th_change)] == (0.0078,0.22,0.35) or cd_blue[self.find_nearest(numpy.asarray(change_b), th_change)] == (0.015,0.352,0.55):
+							white_font_values.append((lists, values))
 					elif th_change < -minsigdelta: 
 						colors[lists][values] = cd_red[self.find_nearest(numpy.asarray(change_r), numpy.abs(th_change))]
+						if cd_red[self.find_nearest(numpy.asarray(change_r), numpy.abs(th_change))] == (0.74,0,0.15):
+							white_font_values.append((lists, values))
 				except ValueError: # DENATURATION
 					if len(list(cell_text[lists][values])) == 3 :
 						colors[lists][values] = (0.5,0.5,0.5) # DENATURED
@@ -1061,6 +1065,14 @@ class ApplicationWindow(QtGui.QMainWindow):
 		table_props = tab.properties()
 		table_cells = table_props['child_artists']
 		for cell in table_cells: cell.set_height(0.1)
+
+		# these lines of code just makes the two darkest shades of blue and darkest red having a white text
+		for key, cell in tab.get_celld().items():
+			white_font_row, white_font_col = key
+			for k in white_font_values:
+				if white_font_row == k[0] and white_font_col == k[1]:
+					cell.set_text_props(color='w')
+					print white_font_row, white_font_col
 
 		#self.canvas.figure.clf()
 		self.canvas.draw()
@@ -1384,7 +1396,7 @@ class AnalysisPlotPopup(QtGui.QWidget):
 		layout.addWidget(self.button2)
 
 		self.linear = QtGui.QRadioButton('linear')
-		self.linear.setChecked(True)
+		self.linear.setChecked(True) 
 		layout.addWidget(self.linear)
 
 		self.log = QtGui.QRadioButton('log')
