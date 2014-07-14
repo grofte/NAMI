@@ -770,9 +770,9 @@ class ApplicationWindow(QtGui.QMainWindow):
 		name = os.path.basename(self.filename)
 		f = open("results.csv", "w")
 		c = csv.writer(f)
-		c.writerow(['Columntemperature', 'Offset_temperature', 'Filter','Columnwell', 'Wellnumbers', 'Increment'])
-		c.writerow([ self.args[0]-1,self.args[1],self.args[2]-1,self.args[3]-1,self.args[4]+1,self.args[5]]) 
-		c.writerow(['Well Number', 'Calculated_Th', 'Peak_2/Warning','User_Input'])
+		c.writerow(["#",'Columntemperature', 'Offset_temperature', 'Filter','Columnwell', 'Wellnumbers', 'Increment'])
+		c.writerow(["#", self.args[0]-1, self.args[1], self.args[2]-1, self.args[3]-1, self.args[4]+1, self.args[5]]) 
+		c.writerow(['Well Number', 'Calculated_Th', 'Peak_2/Warning', 'User_Input'])
 
 		############################################
 		#f = open(self.filename+'_results'+'.txt', 'a')
