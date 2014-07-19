@@ -12,7 +12,10 @@
 import csv
 import sys
 
-input_file = open(sys.argv[1], 'rt')
+try:
+	input_file = open(sys.argv[1], 'rt')
+except:
+	print "Syntax is python rotorgene6000_v1.7-to-NAMI.py my_raw_data.csv"
 
 try:
 	reader = csv.reader(input_file)
