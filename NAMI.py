@@ -69,6 +69,21 @@ from scipy import stats
 #import prettyplotlib as ax
 #from prettyplotlib import brewer2mpl
 
+print "NAMI was developed using the following Python and library versions."
+print "Fortunately, an exact match is not necessarily required."
+print "Python version:", "2.7.6"
+print "PyQt4 version:", "4.8.1"
+print "Matplotlib version:", "1.3.1"
+print "Scipy version:", "0.9.0"
+print "Numpy version:", "1.6.1"
+print ""
+print "These are the installed versions on this system."
+print "Python version:", (sys.version)
+print "PyQt4 version:", QtCore.QT_VERSION_STR
+print "Matplotlib version:", mpl.__version__
+print "Scipy version:", scipy.__version__
+print "Numpy version:", np.__version__
+
 ###################################################################################################################################
 
 progname = os.path.basename(sys.argv[0])
@@ -1275,7 +1290,7 @@ class InputParametersPopup(QtGui.QWidget):
 		try:
 			self.emit(QtCore.SIGNAL('mySig'), int(self.column.text()),float(self.offt.text()), int(self.int.text()), int(self.well.text()),int(self.wellnr.text()),float(self.tincr.text()) )
 		except ValueError:
-			QtGui.QMessageBox.critical(self, "Error", "Re-check your values.")
+			QtGui.QMessageBox.critical(self, "Error", "Re-check your values.\nPlease fill all input fields.")
 
 
 class TablePopup(QtGui.QWidget):
