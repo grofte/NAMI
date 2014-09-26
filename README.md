@@ -35,7 +35,8 @@ Instructions coming. Enthought is also available for Mac but there doesn't seem 
 
 **1.3 Windows** 
 
-The simplest way is to use WinPython which comes with the relevant modules built in ([http://winpython.sourceforge.net/](http://winpython.sourceforge.net/)).
+The simplest way is to use WinPython which comes with the relevant modules built in ([http://winpython.sourceforge.net/](http://winpython.sourceforge.net/)). Download the most recent 2.7 version.
+Even without administrator privileges you can still launch the WinPython Command Prompt and run python and NAMI.
 
 Otherwise Enthought supplies a Python distribution that easily enables the installation of 100+ common Python libraries. They have two free versions - one called Enthought Canopy Express with a reduced number of libraries ([http://www.enthought.com/canopy-express/](http://www.enthought.com/canopy-express/)) and a yearly renewing free academic license for Enthought Canopy ([http://www.enthought.com/products/canopy/academic/](http://www.enthought.com/products/canopy/academic/)). 
 
