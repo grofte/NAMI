@@ -238,6 +238,7 @@ class ApplicationWindow(QtGui.QMainWindow):
 		#self.widget.setGeometry(QRect(1000, 1000, 1000, 1000))
 		# read in data emitted from the other class
 		self.connect(self.widget, SIGNAL('mySig'), self.parameters)
+		self.connect(self.widget, SIGNAL('svgpng'), self.radiobutton)
 
 		# CONTINUE LOOP 
 		self.button2 = QtGui.QPushButton('Begin Data Analysis')
@@ -480,6 +481,11 @@ class ApplicationWindow(QtGui.QMainWindow):
 		''' Really stupid way of accepting parameters send from another class, in the end i never figured out the alternative '''
 		self.args = list(args) # now its a list, so I can access the values easier
 		return self.args
+
+	def radiobutton(self, *args):
+		self.radiobutton = list(args)[0]
+		print self.radiobutton
+		return self.radiobutton
 
 	def parsefile(self, column_temp=0, offset_temp=23, yval=3, columnwell=1, wells=97, increment=1):
 
@@ -760,7 +766,6 @@ class ApplicationWindow(QtGui.QMainWindow):
 
 			as you can see, it calls the function that inserts the data into a dictionary. The parsefile function returns the dictonary of dictionaries (i.e. full data) and an array of all the wells, it is used the in iteration below. '''
 
-		
 		data, array = self.parsefile(column_temp=self.args[0]-1,offset_temp=self.args[1], yval=self.args[2]-1, columnwell=self.args[3]-1, wells=self.args[4]+1, increment=self.args[5]) # reading in the data, using the user comments into the correct datastructure (dictionary of dictionaries)
 
 		#print data['Well %s' % 2]
@@ -901,9 +906,13 @@ class ApplicationWindow(QtGui.QMainWindow):
 
 			#################################################################################################
 			# SAVING THE GRAPH 
-			if self.savfil.isChecked() == True:
-				savefig('Well '+str(self.b[i])+'.png')
-				self.canvas.figure.clf()
+			if self.savfil.isChecked() == True: # need to check whether the radiobutton from the popupwindow (svg or not is checked)
+				if self.radiobutton == 1: 
+					savefig('Well '+str(self.b[i])+'.svg')
+					self.canvas.figure.clf()
+				else:
+					savefig('Well '+str(self.b[i])+'.png')
+					self.canvas.figure.clf()
 			else:
 				self.canvas.figure.clf()
 			#################################################################################################
@@ -1188,7 +1197,7 @@ class InputParametersPopup(QtGui.QWidget):
 		self.column = QtGui.QLineEdit()
 		self.column.setPlaceholderText("1")
 		#self.column.setText("0")
-		grid.addWidget(self.column,10,6)
+		grid.addWidget(self.column,4,1)
 		lbl1 = QtGui.QLabel('Column containing temperature values ')
 		lbl1.move(100,100)
 		grid.addWidget(lbl1,4,0)
@@ -1232,6 +1241,10 @@ class InputParametersPopup(QtGui.QWidget):
 		lbl6 = QtGui.QLabel('Temperature increment multiplier')
 		# lbl4.move(16,10)
 		grid.addWidget(lbl6,9,0)		
+
+		#OUTPUT FILE FORMAT 
+		self.outputfileff = QtGui.QRadioButton('Output file format (.svg/.png)')
+		grid.addWidget(self.outputfileff,11,1)
 
 
 		#########################################
@@ -1290,6 +1303,14 @@ class InputParametersPopup(QtGui.QWidget):
 			self.emit(QtCore.SIGNAL('mySig'), int(self.column.text()),float(self.offt.text()), int(self.int.text()), int(self.well.text()),int(self.wellnr.text()),float(self.tincr.text()) )
 		except ValueError:
 			QtGui.QMessageBox.critical(self, "Error", "Re-check your values.")
+
+		try:
+			if self.outputfileff.isChecked() == True:
+				self.emit(QtCore.SIGNAL("svgpng"), int(1))
+			else:
+				self.emit(QtCore.SIGNAL("svgpng"), int(0))
+		except:
+			pass
 
 
 class TablePopup(QtGui.QWidget):
