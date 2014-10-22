@@ -1,6 +1,3 @@
 Columntemperature,Offset_temperature,Filter,Columnwell,Wellnumbers,Increment
 0,23.0,3,1,97,1.0
 Well Number,Calculated_Th,Peak_2/Warning,User_Input
-Well 1,67.3,,
-Well 2,64.4,,
-Well 3,65.1,,

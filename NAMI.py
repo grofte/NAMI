@@ -908,7 +908,7 @@ class ApplicationWindow(QtGui.QMainWindow):
 			# SAVING THE GRAPH 
 			if self.savfil.isChecked() == True: # need to check whether the radiobutton from the popupwindow (svg or not is checked)
 				if self.radiobutton == 1: 
-					savefig('Well '+str(self.b[i])+'.svg')
+					savefig('Well '+str(self.b[i])+'.svg', format='svg', dpi=1200)
 					self.canvas.figure.clf()
 				else:
 					savefig('Well '+str(self.b[i])+'.png')
@@ -1093,8 +1093,10 @@ class ApplicationWindow(QtGui.QMainWindow):
 		self.canvas.draw()
 
 		#Saving the figure
-		savefig(str(tablename)+"_Table"+'.png')
-
+		if self.radiobutton == 1: 
+			savefig(str(tablename)+"_Table"+'.png', format='svg', dpi=1200)
+		else:
+			savefig(str(tablename)+"_Table"+'.png', format='png', dpi=1200)
 
 		# FORGOTTEN THEIR USED, TOO AFRAID TO DELETE
 		#tab.auto_set_font_size(False)
