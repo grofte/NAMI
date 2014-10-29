@@ -911,7 +911,7 @@ class ApplicationWindow(QtGui.QMainWindow):
 					savefig('Well '+str(self.b[i])+'.svg', format='svg', dpi=1200)
 					self.canvas.figure.clf()
 				else:
-					savefig('Well '+str(self.b[i])+'.png')
+					savefig('Well '+str(self.b[i])+'.png', format='png', dpi=100)
 					self.canvas.figure.clf()
 			else:
 				self.canvas.figure.clf()
@@ -1094,9 +1094,9 @@ class ApplicationWindow(QtGui.QMainWindow):
 
 		#Saving the figure
 		if self.radiobutton == 1: 
-			savefig(str(tablename)+"_Table"+'.png', format='svg', dpi=1200)
+			savefig(str(tablename)+"_Table"+'.svg', format='svg', dpi=1200)
 		else:
-			savefig(str(tablename)+"_Table"+'.png', format='png', dpi=1200)
+			savefig(str(tablename)+"_Table"+'.png', format='png', dpi=100)
 
 		# FORGOTTEN THEIR USED, TOO AFRAID TO DELETE
 		#tab.auto_set_font_size(False)
@@ -1245,10 +1245,15 @@ class InputParametersPopup(QtGui.QWidget):
 		grid.addWidget(lbl6,9,0)		
 
 		#OUTPUT FILE FORMAT 
-		self.outputfileff = QtGui.QRadioButton('Output file format (.svg/.png)')
-		grid.addWidget(self.outputfileff,11,1)
+#		self.outputfileff = QtGui.QRadioButton('Output file format (.svg/.png)')
+#		grid.addWidget(self.outputfileff,11,1)
 
+		self.png = QtGui.QRadioButton('Output in .png')
+		self.png.setChecked(True)
+		grid.addWidget(self.png, 11,1)
 
+		self.svg = QtGui.QRadioButton('Output in .svg')
+		grid.addWidget(self.svg, 12, 1)
 		#########################################
 
 		# TWO BUTTONS
