@@ -46,7 +46,7 @@ from PyQt4.Qt import *
 #from matplotlib.backends.backend_qt4agg import FigureCanvasQTAgg as FigureCanvas
 # These are needed to plot the waterfall plot, which is a hack of the polygon plots. 
 # See: http://matplotlib.org/examples/mplot3d/polys3d_demo.html
-from matplotlib.backends.backend_qt4agg import NavigationToolbar2QTAgg as NavigationToolbar
+from matplotlib.backends.backend_qt4agg import NavigationToolbar2QT as NavigationToolbar
 from matplotlib.figure import Figure
 from matplotlib.backend_bases import FigureManagerBase, KeyEvent, MouseEvent
 from matplotlib.collections import PolyCollection, LineCollection
