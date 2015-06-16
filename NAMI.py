@@ -23,7 +23,8 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-# Please cite: Groftehauge et al. 2014. Acta Cryst D.
+# Please cite: Groftehauge, M. K., Hajizadeh, N. R., Swann, M. J. & Pohl, E. (2015). Acta Cryst. D71, 36-44.
+
 
 from __future__ import unicode_literals
 import sys, os, numpy, csv, math, re, ntpath, itertools, decimal 
