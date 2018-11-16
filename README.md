@@ -11,7 +11,7 @@ Please cite: Groftehauge et al. 2014. Acta Cryst. D
 
 ### 1. Installation
 
-If you cannot get the Python code to run (the instructions are terribly out-dated to be honest) please contact me on Twitter https://twitter.com/DrGroftehauge for pre-compiled executable files for Linux, Mac, or Windows. If you have a good suggestion for where to host the files for distribution please contact me. 
+*If you cannot get the Python code to run (the instructions are terribly out-dated to be honest) please contact me on Twitter https://twitter.com/DrGroftehauge for pre-compiled executable files for Linux, Mac, or Windows. If you have a good suggestion for where to host the files for distribution please contact me.*
 
 This chapter explains how to install the required programs to run NAMI on either Linux, Mac, or Windows.
 
