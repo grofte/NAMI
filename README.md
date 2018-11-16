@@ -9,7 +9,7 @@ Please cite: Groftehauge et al. 2014. Acta Cryst. D
 
 -----------------------------
 
-#####1. Installation
+##### 1. Installation
 This chapter explains how to install the required programs to run NAMI on either Linux, Mac, or Windows.
 
 NAMI runs through Python and currently requires the installation of Python 2.7 and the common modules matplotlib, numpy, scipy, and pyqt. Python 3 is not supported.
@@ -40,7 +40,7 @@ Even without administrator privileges you can still launch the WinPython Command
 
 Otherwise Enthought supplies a Python distribution that easily enables the installation of 100+ common Python libraries. They have two free versions - one called Enthought Canopy Express with a reduced number of libraries ([http://www.enthought.com/canopy-express/](http://www.enthought.com/canopy-express/)) and a yearly renewing free academic license for Enthought Canopy ([http://www.enthought.com/products/canopy/academic/](http://www.enthought.com/products/canopy/academic/)). 
 
-#####2. Running NAMI
+##### 2. Running NAMI
 
 **2.1 Execution** 
 
@@ -110,7 +110,7 @@ Click "Save" to save the current view of any plot.
 
 The output is results.csv a text/csv file of T<sub>h</sub>, the 96-well table as a .png, and (optionally) each plot as a .png. All files are saved in the directory from which you ran python.
 
-#####3. Interpretation
+##### 3. Interpretation
 
 **3.1 High affinity divalent cations**
 
