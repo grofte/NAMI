@@ -2,7 +2,7 @@
 # steponeplus_v2.2-to-NAMI.py
 #
 #     Pedro Sousa Lacerda <pslacerda@gmail.com>
-#     Faculdade de Farmácia, UFBA
+#     LaBiMM, UFBA
 #
 # This script converts XLS data from a StepOnePlus (v2.2.2) to CSV format
 #
@@ -24,7 +24,6 @@ import pandas as pd
 xls_path = sys.argv[1]
 output_path = splitext(xls_path)[0] + '_NAMI.csv'
 
-
 # Read sheet
 sheet_name = "Multicomponent Data"
 data = pd.read_excel(xls_path, sheet_name, header=7)
@@ -38,4 +37,3 @@ with open(output_path, 'wb') as output_file:
 	for well, intensities in data.iteritems():
 		for temp, intensity in intensities.iteritems():
 			writer.writerow((temp, well, intensity))
-
