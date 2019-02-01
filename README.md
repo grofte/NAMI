@@ -13,11 +13,32 @@ Please cite: Groftehauge et al. 2014. Acta Cryst. D
 
 *If you cannot get the Python code to run (the instructions are terribly out-dated to be honest) please contact me on Twitter https://twitter.com/DrGroftehauge for pre-compiled executable files for Linux, Mac, or Windows. If you have a good suggestion for where to host the files for distribution please contact me.*
 
-This chapter explains how to install the required programs to run NAMI on either Linux, Mac, or Windows.
+This chapter explains how to install the required programs to run NAMI on either Linux, Mac, Windows, or preferably on a Anaconda system.
 
 NAMI runs through Python and currently requires the installation of Python 2.7 and the common modules matplotlib, numpy, scipy, and pyqt. Python 3 is not supported.
 
-**1.1 Linux** 
+**1.1 Anaconda**
+
+If Anaconda is installed on the system, an environment can be created to install NAMI.
+
+```bash
+conda create --name nami python=2.7
+conda activate nami
+conda install scipy=1.2.0 icu=56.1 pyqt=4 matplotlib=2.0.0b1
+
+# required by the StepOnePlus convert script
+conda install pandas=0.23.4 xlrd=1.2.0
+```
+
+To start NAMI you could run:
+
+```bash
+conda activate nami
+python ./NAMI.py
+```
+
+
+**1.2 Linux**
 
 Most Linux distributions have Python installed as default. However, an older distribution might have Python 2.6 or earlier and it should not be replaced since so many programs depend upon it. The simplest way forward is to upgrade Linux, use virtualenv, or possibly use the Enthought Python Distribution (EPD). The use of virtualenv or EPD to run parallel Python versions is outside the scope of this manual however. 
 
@@ -32,11 +53,11 @@ sudo pip install matplotlib
 ```
 Build-dep adds all the things that matplotlib depends on to run - it might not be necessary but it won’t hurt. Pip is preferable to easy-install as it has a better uninstall function (pip remove). 
 
-**1.2 Mac**
+**1.3 Mac**
 
 Instructions coming. Enthought is also available for Mac but there doesn't seem to be anything as simple as WinPython. 
 
-**1.3 Windows** 
+**1.4 Windows**
 
 The simplest way is to use WinPython which comes with the relevant modules built in ([http://winpython.sourceforge.net/](http://winpython.sourceforge.net/)). Download the most recent 2.7 version.
 Even without administrator privileges you can still launch the WinPython Command Prompt and run python and NAMI.
